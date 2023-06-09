@@ -10,14 +10,19 @@ const Page = () => {
 	return (
 		<div className="body">
 			<div className="image">
-				<img src={Tile} alt="Tile Image" style={{ borderRadius: "20px" }} />
+				<img
+					src={Tile}
+					alt="Tile Image"
+					style={{ borderRadius: "20px" }}
+					className="image-mobile"
+				/>
 			</div>
 			<div className="choices">
 				<div className="page_one-items">
 					<div>
 						<h2>Size</h2>
-						<div className="btns-container">
-							<Link to="/tiles">
+						<Link to="/tiles">
+							<div className="btns-container">
 								<input
 									type="radio"
 									id="option1"
@@ -46,7 +51,7 @@ const Page = () => {
 									onClick={handleClick}
 								/>
 								<label htmlFor="option3">16&apos; 55&quot;</label>
-								<input
+								{/* <input
 									type="radio"
 									id="option4"
 									name="options-size"
@@ -85,9 +90,9 @@ const Page = () => {
 									value="16' 55&quot;"
 									onClick={handleClick}
 								/>
-								<label htmlFor="option8">16&apos; 55&quot;</label>
-							</Link>
-						</div>
+								<label htmlFor="option8">16&apos; 55&quot;</label> */}
+							</div>
+						</Link>
 					</div>
 
 					<div>

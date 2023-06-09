@@ -88,4 +88,14 @@
 	.paragraph-btn__container {
 		justify-content: space-evenly;
 	}
+
+	#specialBtn-Signal {
+		width: 7rem;
+		height: 5rem;
+	}
+
+	#specialBtn-Rectangle {
+		width: 15rem;
+		height: 6rem;
+	}
 }

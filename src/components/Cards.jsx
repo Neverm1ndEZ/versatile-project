@@ -161,7 +161,7 @@ const Cards = () => {
 										handleOpen("lg");
 										handleClickForComponent("LiveImage");
 									}}
-									size="lg"
+									id="specialBtn-Signal"
 								>
 									<img className="btn-image" src={Signal} alt="Signal" />
 								</Button>
@@ -178,7 +178,7 @@ const Cards = () => {
 										handleOpen("lg");
 										handleClickForComponent("Application");
 									}}
-									size="lg"
+									id="specialBtn-Rectangle"
 								>
 									<img className="btn-image" src={Rectangle} alt="Rectangle" />
 								</Button>
