@@ -67,7 +67,13 @@ const NavForCatalogue = () => {
 								/>
 							</div>
 						</Modal.Body>
-						<Modal.Footer style={{ display: "flex", textAlign: "center" }}>
+						<Modal.Footer
+							style={{
+								display: "flex",
+								justifyContent: "center",
+								textAlign: "center",
+							}}
+						>
 							<Button onClick={handleClose} style={BTN_STYLES}>
 								Verify OTP
 							</Button>
