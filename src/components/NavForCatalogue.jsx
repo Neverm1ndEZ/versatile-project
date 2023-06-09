@@ -13,6 +13,7 @@ const NavForCatalogue = () => {
 
 	const EmailModal = () => {
 		const [otpClicked, setOtpClicked] = useState(false);
+		const [phoneNumber, setPhoneNumber] = useState("");
 
 		const handleGetOTP = () => {
 			setOtpClicked(true);
@@ -20,6 +21,15 @@ const NavForCatalogue = () => {
 
 		const handleGetOTPBack = () => {
 			setOtpClicked(false);
+		};
+
+		const handlePhoneNumberChange = (e) => {
+			const inputPhoneNumber = e.target.value;
+			const formattedPhoneNumber = inputPhoneNumber.replace(/\D/g, "");
+
+			if (formattedPhoneNumber.length <= 10) {
+				setPhoneNumber(formattedPhoneNumber);
+			}
 		};
 
 		const OTPModal = () => {
@@ -33,13 +43,11 @@ const NavForCatalogue = () => {
 						size="md"
 						keyboard={false}
 					>
-						<Modal.Header closeButton={false}>
-							<Modal.Title style={HEADER_STYLES}>
-								Get Catalogue Access
-							</Modal.Title>
+						<Modal.Header closeButton={false} style={HEADER_STYLES}>
+							Get Catalogue Access
 						</Modal.Header>
 						<Modal.Body style={{ textAlign: "center" }}>
-							<p>
+							<p style={P_STYLES}>
 								Enter OTP to validate your mobile number and get your catalogue
 								access.
 							</p>
@@ -109,9 +117,10 @@ const NavForCatalogue = () => {
 							Enter your mobile number to access your catalogue.
 						</p>
 						<input
-							type="number"
+							type="text"
+							value={phoneNumber}
+							onChange={handlePhoneNumberChange}
 							placeholder="Enter Mobile Number"
-							className="modal-input"
 							style={INPUT_STYLES}
 						/>
 					</Modal.Body>
@@ -149,7 +158,7 @@ const NavForCatalogue = () => {
 
 	const INPUT_STYLES = {
 		margin: "0.5rem 0",
-		padding: "1rem 6rem",
+		padding: "1rem 5rem",
 		border: "1px solid #000",
 		borderRadius: "20px",
 		textAlign: "center",
