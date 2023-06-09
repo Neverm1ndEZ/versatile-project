@@ -1,0 +1,70 @@
+.navbar {
+	background: #fff;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	box-shadow: 0px -4px 39px 4px rgba(0, 0, 0, 0.25);
+	width: 100vw;
+	height: 7.25rem;
+	position: fixed !important;
+	top: 0;
+}
+
+.logo {
+	cursor: pointer;
+	padding-left: 2rem;
+}
+
+.catalogue-btn {
+	text-decoration: none;
+	color: #000;
+}
+
+.catalogue-btn:hover,
+.catalogue-btn:focus,
+.catalogue-btn:visited {
+	text-decoration: none;
+	color: #000;
+}
+
+.text {
+	padding-right: 2rem;
+	font-family: "Quicksand";
+	font-style: normal;
+	font-weight: 600;
+	font-size: 19px;
+	line-height: 24px;
+	text-align: right;
+	letter-spacing: 0.53em;
+}
+
+.modal-input::-webkit-input-placeholder {
+	font-family: "Quicksand";
+	font-style: normal;
+	font-weight: 400;
+	font-size: 23px;
+	line-height: 35px;
+	letter-spacing: 0.06em;
+	color: #b3b3b3;
+}
+
+@media screen and (max-width: 768px) {
+	.navbar {
+		height: 4rem;
+	}
+
+	.text {
+		padding-right: 1rem;
+		font-size: 10px;
+		line-height: inherit;
+	}
+
+	.logo {
+		padding-left: 1rem;
+	}
+
+	.navbar_img {
+		width: 175px;
+		height: 29px;
+	}
+}
