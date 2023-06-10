@@ -46,7 +46,7 @@ const NavForCatalogue = () => {
 						<Modal.Header closeButton={false} style={HEADER_STYLES}>
 							Get Catalogue Access
 						</Modal.Header>
-						<Modal.Body style={{ textAlign: "center" }}>
+						<Modal.Body style={BODY_STYLES}>
 							<p style={P_STYLES}>
 								Enter OTP to validate your mobile number and get your catalogue
 								access.
@@ -55,7 +55,7 @@ const NavForCatalogue = () => {
 								style={{
 									display: "flex",
 									justifyContent: "center",
-									marginTop: "2rem",
+									margin: "1rem 0",
 								}}
 							>
 								<OtpInput
@@ -83,10 +83,10 @@ const NavForCatalogue = () => {
 							}}
 						>
 							<Button onClick={handleClose} style={BTN_STYLES}>
-								Verify OTP
+								VERIFY OTP
 							</Button>
 							<Button onClick={handleGetOTPBack} style={BTN_STYLES}>
-								Change Number
+								CHANGE NUMBER
 							</Button>
 						</Modal.Footer>
 					</Modal>
@@ -112,7 +112,7 @@ const NavForCatalogue = () => {
 					<Modal.Header closeButton={false} style={HEADER_STYLES}>
 						Get Catalogue Access
 					</Modal.Header>
-					<Modal.Body style={{ textAlign: "center" }}>
+					<Modal.Body style={BODY_STYLES}>
 						<p style={P_STYLES}>
 							Enter your mobile number to access your catalogue.
 						</p>
@@ -126,7 +126,7 @@ const NavForCatalogue = () => {
 					</Modal.Body>
 					<Modal.Footer style={{ textAlign: "center" }}>
 						<Button onClick={handleGetOTP} style={BTN_STYLES}>
-							Get OTP
+							GET OTP
 						</Button>
 					</Modal.Footer>
 				</Modal>
@@ -154,6 +154,7 @@ const NavForCatalogue = () => {
 		lineHeight: "24px",
 		letterSpacing: "0.06em",
 		color: "#000000",
+		padding: "0 0 1.5rem 0",
 	};
 
 	const INPUT_STYLES = {
@@ -175,6 +176,13 @@ const NavForCatalogue = () => {
 		height: "4rem",
 		fontFamily: "Quicksand",
 		fontSize: "16px",
+		fontWeight: "700",
+		letterSpacing: "0.06em",
+	};
+
+	const BODY_STYLES = {
+		textAlign: "center",
+		marginTop: "0",
 	};
 
 	return (
