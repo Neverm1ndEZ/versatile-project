@@ -65,9 +65,9 @@ const NavForCatalogue = () => {
 									renderSeparator={<span>-</span>}
 									renderInput={(props) => <input {...props} />}
 									inputStyle={{
-										width: "4.5rem",
-										height: "4.5rem",
-										margin: "0 1rem",
+										width: "4rem",
+										height: "4rem",
+										margin: "0 0.5rem",
 										fontSize: "2rem",
 										borderRadius: "4px",
 										border: "1px solid rgba(0,0,0,.3)",
