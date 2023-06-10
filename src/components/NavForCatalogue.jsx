@@ -65,8 +65,8 @@ const NavForCatalogue = () => {
 									renderSeparator={<span>-</span>}
 									renderInput={(props) => <input {...props} />}
 									inputStyle={{
-										width: "3rem",
-										height: "3rem",
+										width: "4.5rem",
+										height: "4.5rem",
 										margin: "0 1rem",
 										fontSize: "2rem",
 										borderRadius: "4px",
@@ -171,8 +171,10 @@ const NavForCatalogue = () => {
 		borderRadius: "20px",
 		cursor: "pointer",
 		color: "white",
-		width: "17rem",
+		width: "15rem",
 		height: "4rem",
+		fontFamily: "Quicksand",
+		fontSize: "16px",
 	};
 
 	return (

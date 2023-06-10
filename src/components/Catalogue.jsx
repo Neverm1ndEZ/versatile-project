@@ -2,6 +2,8 @@ import "./Catalogue.css";
 import CardImage from "../assets/card_img.png";
 
 const Catalogue = () => {
+	const handleClickCards = () => console.log("Card clicked");
+
 	const Data = [
 		{
 			id: 0,
@@ -61,7 +63,7 @@ const Catalogue = () => {
 
 	return (
 		<>
-			<div className="container card__container">
+			<div className="container card__container" onClick={handleClickCards}>
 				{Data.map(({ id, heading, description, image }) => {
 					return (
 						<div key={id} className="item">
