@@ -1,5 +1,5 @@
 .polaroid {
-	width: 90%;
+	width: 87%;
 	background-color: #fff;
 	box-shadow: 0px 4px 63px rgba(0, 0, 0, 0.25);
 	margin: 5rem auto;
@@ -17,7 +17,7 @@
 }
 
 .btn-container {
-	padding: 8px 5px;
+	padding: 5px 5px;
 }
 
 .text-container h3 {
@@ -25,8 +25,8 @@
 	font-family: "Quicksand";
 	font-style: normal;
 	font-weight: 700;
-	font-size: 45px;
-	line-height: 60px;
+	font-size: 35px;
+	line-height: 45px;
 	letter-spacing: 0.06em;
 	color: #000000;
 }
@@ -36,8 +36,8 @@
 	font-family: "Quicksand";
 	font-style: normal;
 	font-weight: 500;
-	font-size: 23px;
-	line-height: 27px;
+	font-size: 16px;
+	line-height: 20px;
 	letter-spacing: 0.06em;
 	color: #000000;
 }
@@ -55,9 +55,19 @@
 	justify-content: space-between;
 }
 
-.btn-image {
-	width: 28px;
-	height: 28px;
+.btn-image-signal {
+	width: 35px;
+	height: 35px;
+}
+
+#specialBtn-Signal {
+	width: 4rem;
+	height: 4rem;
+}
+
+#specialBtn-Rectangle {
+	width: 4rem;
+	height: 4rem;
 }
 
 @media screen and (max-width: 768px) {

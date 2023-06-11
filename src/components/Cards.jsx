@@ -35,8 +35,8 @@ const Cards = () => {
 					<Modal.Body>
 						<div className="gallery-container">
 							<SimpleImageSlider
-								width={896}
-								height={504}
+								width={850}
+								height={450}
 								images={images}
 								showBullets={false}
 								showNavs={true}
@@ -62,8 +62,8 @@ const Cards = () => {
 					<Modal.Body>
 						<div className="gallery-container">
 							<SimpleImageSlider
-								width={896}
-								height={504}
+								width={850}
+								height={450}
 								images={images}
 								showBullets={false}
 								showNavs={true}
@@ -88,8 +88,8 @@ const Cards = () => {
 		fontFamily: '"Quicksand"',
 		fontStyle: "normal",
 		fontWeight: 700,
-		fontSize: "50px",
-		lineHeight: "62px",
+		fontSize: "35px",
+		lineHeight: "42px",
 		letterSpacing: "0.06em",
 		color: "#000000",
 	};
@@ -163,7 +163,7 @@ const Cards = () => {
 									}}
 									id="specialBtn-Signal"
 								>
-									<img className="btn-image" src={Signal} alt="Signal" />
+									<img className="btn-image-signal" src={Signal} alt="Signal" />
 								</Button>
 								{showComponent && componentType === "LiveImage" && (
 									<LiveImageModalComponent />
@@ -180,7 +180,11 @@ const Cards = () => {
 									}}
 									id="specialBtn-Rectangle"
 								>
-									<img className="btn-image" src={Rectangle} alt="Rectangle" />
+									<img
+										// className="btn-image-rectangle"
+										src={Rectangle}
+										alt="Rectangle"
+									/>
 								</Button>
 								{showComponent && componentType === "Application" && (
 									<ApplicationModalComponent />
