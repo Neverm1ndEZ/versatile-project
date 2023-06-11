@@ -181,7 +181,7 @@ const Cards = () => {
 									id="specialBtn-Rectangle"
 								>
 									<img
-										// className="btn-image-rectangle"
+										className="btn-image-rectangle"
 										src={Rectangle}
 										alt="Rectangle"
 									/>

@@ -11,6 +11,10 @@
 	z-index: 1;
 }
 
+.navbar_img {
+	width: 200px;
+}
+
 .logo {
 	cursor: pointer;
 	padding-left: 2rem;
