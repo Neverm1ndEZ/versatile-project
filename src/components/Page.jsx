@@ -13,7 +13,7 @@ const Page = () => {
 				<img
 					src={Tile}
 					alt="Tile Image"
-					style={{ borderRadius: "20px", width: "30rem", height: "30rem" }}
+					style={{ borderRadius: "20px" }}
 					className="image-mobile"
 				/>
 			</div>

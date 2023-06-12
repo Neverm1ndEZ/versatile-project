@@ -119,4 +119,16 @@
 		width: 6rem;
 		height: 4rem;
 	}
+
+	.image-slider {
+		height: 300px !important;
+		width: 225px !important;
+		overflow-y: hidden;
+		overflow-x: hidden;
+	}
+
+	.gallery-container h4 {
+		font-size: 25px;
+		line-height: 30px;
+	}
 }

@@ -44,6 +44,7 @@ const Cards = () => {
 									marginTop: "2rem",
 									overflow: "hidden",
 								}}
+								className="image-slider"
 							/>
 						</div>
 					</Modal.Body>
