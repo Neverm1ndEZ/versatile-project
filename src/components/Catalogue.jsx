@@ -68,7 +68,11 @@ const Catalogue = () => {
 					return (
 						<div key={id} className="item">
 							<div className="hero_item-image">
-								<img src={image} alt="File Image" />
+								<img
+									src={image}
+									alt="File Image"
+									style={{ overflow: "hidden" }}
+								/>
 							</div>
 							<h3>{heading}</h3>
 							<p>{description}</p>

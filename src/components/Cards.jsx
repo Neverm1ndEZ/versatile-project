@@ -120,6 +120,7 @@ const Cards = () => {
 				"Lorem ipsum dolor sit amet consectetur. Nunc id nunc lacinia \n sed ut sed laoreet. Tempor netus vel cras dolor sit tellus.\n",
 			size: `16' 55"`,
 			type: "Marble",
+			color: "Red",
 			image: Tile1,
 		},
 		{
@@ -129,6 +130,7 @@ const Cards = () => {
 				"Lorem ipsum dolor sit amet consectetur. Nunc id nunc lacinia \n sed ut sed laoreet. Tempor netus vel cras dolor sit tellus.\n",
 			size: `16' 55"`,
 			type: "Marble",
+			color: "Red",
 			image: Tile2,
 		},
 		{
@@ -138,13 +140,14 @@ const Cards = () => {
 				"Lorem ipsum dolor sit amet consectetur. Nunc id nunc lacinia \n sed ut sed laoreet. Tempor netus vel cras dolor sit tellus.\n",
 			size: `16' 55"`,
 			type: "Marble",
+			color: "Red",
 			image: Tile3,
 		},
 	];
 
 	return (
 		<>
-			{Data.map(({ id, heading, paragraph, size, type, image }) => {
+			{Data.map(({ id, heading, paragraph, size, type, color, image }) => {
 				return (
 					<div key={id} className="polaroid">
 						<img
@@ -197,6 +200,9 @@ const Cards = () => {
 								</Button>
 								<Button style={btnStyle} onClick={handleCLick}>
 									{type}
+								</Button>
+								<Button style={btnStyle} onClick={handleCLick}>
+									{color}
 								</Button>
 							</div>
 						</div>

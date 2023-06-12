@@ -139,8 +139,8 @@ const NavForCatalogue = () => {
 		fontFamily: '"Quicksand"',
 		fontStyle: "normal",
 		fontWeight: 700,
-		fontSize: "50px",
-		lineHeight: "62px",
+		fontSize: "30px",
+		lineHeight: "41px",
 		letterSpacing: "0.06em",
 		color: "#000000",
 		textAlign: "center",
@@ -150,11 +150,11 @@ const NavForCatalogue = () => {
 		fontFamily: '"Quicksand"',
 		fontStyle: "normal",
 		fontWeight: 400,
-		fontSize: "19px",
-		lineHeight: "24px",
+		fontSize: "17px",
+		lineHeight: "15px",
 		letterSpacing: "0.06em",
 		color: "#000000",
-		padding: "0 0 1.5rem 0",
+		padding: "0 0 0.75rem 0",
 	};
 
 	const INPUT_STYLES = {
@@ -172,11 +172,11 @@ const NavForCatalogue = () => {
 		borderRadius: "20px",
 		cursor: "pointer",
 		color: "white",
-		width: "15rem",
-		height: "4rem",
+		width: "8rem",
+		height: "2rem",
 		fontFamily: "Quicksand",
-		fontSize: "16px",
-		fontWeight: "700",
+		fontSize: "12px",
+		fontWeight: "500",
 		letterSpacing: "0.06em",
 	};
 
