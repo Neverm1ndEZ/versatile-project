@@ -5,10 +5,8 @@ import Tile2 from "../assets/tile img 2.png";
 import Tile3 from "../assets/tile img 3.png";
 import Signal from "../assets/signal.png";
 import Rectangle from "../assets/Rectangle.png";
-import IMG1 from "../assets/liveImage.png";
-import IMG2 from "../assets/liveImage2.png";
 import "./Cards.css";
-import SimpleImageSlider from "react-simple-image-slider";
+import CardCarousel from "./CardCarousel";
 
 const Cards = () => {
 	const [showComponent, setShowComponent] = useState(false);
@@ -34,18 +32,7 @@ const Cards = () => {
 					</Modal.Header>
 					<Modal.Body>
 						<div className="gallery-container">
-							<SimpleImageSlider
-								width={850}
-								height={450}
-								images={images}
-								showBullets={false}
-								showNavs={true}
-								style={{
-									marginTop: "2rem",
-									overflow: "hidden",
-								}}
-								className="image-slider"
-							/>
+							<CardCarousel />
 						</div>
 					</Modal.Body>
 				</Modal>
@@ -62,17 +49,7 @@ const Cards = () => {
 					</Modal.Header>
 					<Modal.Body>
 						<div className="gallery-container">
-							<SimpleImageSlider
-								width={850}
-								height={450}
-								images={images}
-								showBullets={false}
-								showNavs={true}
-								style={{
-									marginTop: "2rem",
-									overflow: "hidden",
-								}}
-							/>
+							<CardCarousel />
 						</div>
 					</Modal.Body>
 				</Modal>
@@ -109,8 +86,6 @@ const Cards = () => {
 		margin: "4px 4px",
 		color: "#fff",
 	};
-
-	const images = [{ url: IMG1 }, { url: IMG2 }];
 
 	const Data = [
 		{

@@ -15,8 +15,8 @@
     "react-bootstrap": "^2.7.4",
     "react-dom": "^18.2.0",
     "react-otp-input": "^3.0.2",
+    "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.11.2",
-    "react-simple-image-slider": "^2.4.1",
     "rsuite": "^5.35.0"
   },
   "devDependencies": {
