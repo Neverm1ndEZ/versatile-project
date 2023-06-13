@@ -37,6 +37,14 @@ const NavForCatalogue = () => {
 
 	const handleOtpModalClose = () => {
 		setOtpModalOpen(false);
+		setOtp(""); // Reset OTP input
+	};
+
+	const handleOpenEmailModal = () => {
+		setPhoneNumber("");
+		setEmailModalOpen(true);
+		setOtpModalOpen(false);
+		setOtp(""); // Reset OTP input
 	};
 
 	return (
@@ -130,7 +138,7 @@ const NavForCatalogue = () => {
 					<Button onClick={handleVerifyOtp} style={BTN_STYLES}>
 						VERIFY OTP
 					</Button>
-					<Button onClick={() => setEmailModalOpen(true)} style={BTN_STYLES}>
+					<Button onClick={handleOpenEmailModal} style={BTN_STYLES}>
 						CHANGE NUMBER
 					</Button>
 				</Modal.Footer>
