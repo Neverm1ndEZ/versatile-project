@@ -4,6 +4,7 @@ import Logo from "../assets/logo.png";
 import { useState } from "react";
 import { Modal, ButtonToolbar, Button } from "rsuite";
 import OtpInput from "react-otp-input";
+import axios from "axios";
 
 const NavForCatalogue = () => {
 	const [phoneNumber, setPhoneNumber] = useState("");
@@ -20,15 +21,47 @@ const NavForCatalogue = () => {
 		}
 	};
 
-	const handleGetOtp = () => {
-		setEmailModalOpen(false);
-		setOtpModalOpen(true);
+	const handleGetOtp = (e) => {
+		e.preventDefault();
+		sendOtp();
+	};
+
+	const sendOtp = () => {
+		const formData = new FormData();
+		formData.append("mobile", phoneNumber);
+		formData.append("otp", "0974");
+
+		axios
+			.post("http://versatileslab.com/apis/admin_api/send_otp.php", formData)
+			.then((response) => {
+				console.log("OTP sent successfully ", response.data);
+				setEmailModalOpen(false);
+				setOtpModalOpen(true);
+			})
+			.catch((error) => {
+				console.error("Failed to send OTP:", error.response);
+			});
 	};
 
 	const handleVerifyOtp = () => {
-		// Perform OTP verification logic here
-		// If OTP is verified successfully, close the modal
-		setOtpModalOpen(false);
+		verifyOtp();
+	};
+
+	const verifyOtp = () => {
+		const formData = new FormData();
+		formData.append("otp", "0974");
+		formData.append("mobile", phoneNumber);
+
+		axios
+			.post("http://versatileslab.com/apis/admin_api/verify_otp.php", formData)
+			.then((response) => {
+				console.log("OTP verified successfully ", response.data);
+				setOtpModalOpen(false);
+				setOtp("");
+			})
+			.catch((error) => {
+				console.error(error);
+			});
 	};
 
 	const handleEmailModalClose = () => {

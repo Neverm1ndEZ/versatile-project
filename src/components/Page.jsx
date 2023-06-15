@@ -1,4 +1,6 @@
 import "./Page.css";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import Tile from "../assets/image.png";
 import { Link } from "react-router-dom";
 
@@ -7,152 +9,114 @@ const Page = () => {
 		console.log("The button has been clicked " + event.target.value);
 	};
 
+	const [dataFetched, setDataFetched] = useState(false); // to control re-fetching of data
+
+	const [colorDataFetched, setColorDataFetched] = useState([]);
+	const [sizeDataFetched, seSizeDataFetched] = useState([]);
+	const [surfaceFinishDataFetched, setSurfaceFinishDataFetched] = useState([]);
+
+	useEffect(() => {
+		const fetchData = () => {
+			try {
+				axios
+					.get("https://versatileslab.com/apis/admin_api/get_color.php")
+					.then((colorResponse) =>
+						setColorDataFetched(colorResponse.data.data),
+					);
+
+				axios
+					.get("http://versatileslab.com/apis/admin_api/get_size.php")
+					.then((sizeResponse) => seSizeDataFetched(sizeResponse.data.data));
+
+				axios
+					.get(
+						"http://versatileslab.com/apis/admin_api/get_surface_finishes.php",
+					)
+					.then((surfaceFinishResponse) =>
+						setSurfaceFinishDataFetched(surfaceFinishResponse.data.data),
+					);
+			} catch (error) {
+				console.log(error.response.data);
+			}
+		};
+
+		if (!dataFetched) {
+			fetchData();
+			setDataFetched(true);
+		}
+	}, [dataFetched]);
+
 	return (
 		<div className="body">
-			<div className="image">
-				<img
-					src={Tile}
-					alt="Tile Image"
-					style={{ borderRadius: "20px" }}
-					className="image-mobile"
-				/>
-			</div>
+			<Link to="/tiles">
+				<div className="image">
+					<img
+						src={Tile}
+						alt="Tile Image"
+						style={{ borderRadius: "20px" }}
+						className="image-mobile"
+					/>
+				</div>
+			</Link>
 			<div className="choices">
 				<div className="page_one-items">
 					<div>
 						<h2>Size</h2>
-						<Link to="/tiles">
-							<div className="btns-container">
-								<input
-									type="radio"
-									id="option1"
-									name="options-size"
-									value="16' 55&quot;"
-									onClick={handleClick}
-									className="page-one-btns"
-								/>
-								<label htmlFor="option1" className="page-one-label">
-									16&apos; 55&quot;
-								</label>
-
-								<input
-									type="radio"
-									id="option2"
-									name="options-size"
-									value="16' 55&quot;"
-									onClick={handleClick}
-								/>
-								<label htmlFor="option2">16&apos; 55&quot;</label>
-								<input
-									type="radio"
-									id="option3"
-									name="options-size"
-									value="16' 55&quot;"
-									onClick={handleClick}
-								/>
-								<label htmlFor="option3">16&apos; 55&quot;</label>
-								{/* <input
-									type="radio"
-									id="option4"
-									name="options-size"
-									value="16' 55&quot;"
-									onClick={handleClick}
-								/>
-								<label htmlFor="option4">16&apos; 55&quot;</label>
-								<input
-									type="radio"
-									id="option5"
-									name="options-size"
-									value="16' 55&quot;"
-									onClick={handleClick}
-								/>
-								<label htmlFor="option5">16&apos; 55&quot;</label>
-								<input
-									type="radio"
-									id="option6"
-									name="options-size"
-									value="16' 55&quot;"
-									onClick={handleClick}
-								/>
-								<label htmlFor="option6">16&apos; 55&quot;</label>
-								<input
-									type="radio"
-									id="option7"
-									name="options-size"
-									value="16' 55&quot;"
-									onClick={handleClick}
-								/>
-								<label htmlFor="option7">16&apos; 55&quot;</label>
-								<input
-									type="radio"
-									id="option8"
-									name="options-size"
-									value="16' 55&quot;"
-									onClick={handleClick}
-								/>
-								<label htmlFor="option8">16&apos; 55&quot;</label> */}
-							</div>
-						</Link>
+						{/* <Link to="/tiles"> */}
+						{sizeDataFetched.map((sizeData) => {
+							const { id, size } = sizeData;
+							return (
+								<div className="btns-container" key={id}>
+									<input
+										type="radio"
+										id={id}
+										name={size}
+										value={size}
+										onClick={handleClick}
+									/>
+									<label htmlFor={id}>{size}</label>
+								</div>
+							);
+						})}
+						{/* </Link> */}
 					</div>
 
 					<div>
 						<h2>Surface Finish</h2>
-						<div className="btns-container">
-							<input
-								type="radio"
-								id="option9"
-								name="options-finish"
-								value="Slate"
-								onClick={handleClick}
-							/>
-							<label htmlFor="option9">Slate</label>
-							<input
-								type="radio"
-								id="option10"
-								name="options-finish"
-								value="Granite"
-								onClick={handleClick}
-							/>
-							<label htmlFor="option10">Granite</label>
-							<input
-								type="radio"
-								id="option11"
-								name="options-finish"
-								value="Marble"
-								onClick={handleClick}
-							/>
-							<label htmlFor="option11">Marble</label>
-						</div>
+						{surfaceFinishDataFetched.map((surfaceData) => {
+							const { id, surface_finish } = surfaceData;
+							return (
+								<div className="btns-container" key={id}>
+									<input
+										type="radio"
+										id={id}
+										name={surface_finish}
+										value={surface_finish}
+										onClick={handleClick}
+									/>
+									<label htmlFor={id}>{surface_finish}</label>
+								</div>
+							);
+						})}
 					</div>
 
 					<div>
 						<h2>Colour</h2>
-						<div className="btns-container">
-							<input
-								type="radio"
-								id="option12"
-								name="options-color"
-								value="Red"
-								onClick={handleClick}
-							/>
-							<label htmlFor="option12">Red</label>
-							<input
-								type="radio"
-								id="option13"
-								name="options-color"
-								value="Green"
-								onClick={handleClick}
-							/>
-							<label htmlFor="option13">Green</label>
-							<input
-								type="radio"
-								id="option14"
-								name="options-color"
-								value="Gray"
-								onClick={handleClick}
-							/>
-							<label htmlFor="option14">Gray</label>
-						</div>
+						{colorDataFetched.map((colorData) => {
+							const { id, color } = colorData;
+							return (
+								<div className="btns-container" key={id}>
+									<input
+										type="radio"
+										id={id}
+										name={color}
+										value={color}
+										onClick={handleClick}
+									/>
+									<label htmlFor={id}>{color}</label>
+								</div>
+							);
+						})}
 					</div>
 				</div>
 			</div>
