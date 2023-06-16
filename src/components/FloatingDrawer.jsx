@@ -1,6 +1,7 @@
 import { Drawer, ButtonToolbar, IconButton } from "rsuite";
 import AngleLeftIcon from "@rsuite/icons/legacy/AngleLeft";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import "./FloatingDrawer.css";
 
 const FloatingDrawer = () => {
@@ -12,9 +13,64 @@ const FloatingDrawer = () => {
 		setPlacement(key);
 	};
 
+	const [selectedSize, setSelectedSize] = useState(""); // state for selected size
+	const [selectedSurface, setSelectedSurface] = useState(""); // state for selected surface finish
+	const [selectedColor, setSelectedColor] = useState(""); // state for selected color
+
 	const handleClick = (event) => {
-		console.log("The button has been clicked " + event.target.value);
+		const { name, value } = event.target;
+
+		// Update the selected state based on the group of buttons clicked
+		switch (name) {
+			case "size":
+				setSelectedSize(value);
+				break;
+			case "surface":
+				setSelectedSurface(value);
+				break;
+			case "color":
+				setSelectedColor(value);
+				break;
+			default:
+				break;
+		}
 	};
+
+	const [dataFetched, setDataFetched] = useState(false); // to control re-fetching of data
+	const [colorDataFetched, setColorDataFetched] = useState([]);
+	const [sizeDataFetched, setSizeDataFetched] = useState([]);
+	const [surfaceFinishDataFetched, setSurfaceFinishDataFetched] = useState([]);
+
+	useEffect(() => {
+		const fetchData = () => {
+			try {
+				axios
+					.get("https://versatileslab.com/apis/admin_api/get_color.php")
+					.then((colorResponse) =>
+						setColorDataFetched(colorResponse.data.data),
+					);
+
+				axios
+					.get("http://versatileslab.com/apis/admin_api/get_size.php")
+					.then((sizeResponse) => setSizeDataFetched(sizeResponse.data.data));
+
+				axios
+					.get(
+						"http://versatileslab.com/apis/admin_api/get_surface_finishes.php",
+					)
+					.then((surfaceFinishResponse) =>
+						setSurfaceFinishDataFetched(surfaceFinishResponse.data.data),
+					);
+			} catch (error) {
+				console.log(error.response.data);
+			}
+		};
+
+		if (!dataFetched) {
+			fetchData();
+			setDataFetched(true);
+		}
+	}, [dataFetched]);
 
 	return (
 		<>
@@ -37,94 +93,62 @@ const FloatingDrawer = () => {
 					<div className="page_two-items_drawer">
 						<div>
 							<h2 className="left_heading">Size</h2>
-							<div className="selection-btns_drawer">
-								<input
-									type="radio"
-									id="option1_drawer"
-									name="options-size"
-									value="16' 55&quot;"
-									onClick={handleClick}
-								/>
-								<label htmlFor="option1_drawer" className="select-label">
-									16&apos; 55&quot;
-								</label>
-								<input
-									type="radio"
-									id="option2_drawer"
-									name="options-size"
-									value="16' 55&quot;"
-									onClick={handleClick}
-								/>
-								<label htmlFor="option2_drawer">16&apos; 55&quot;</label>
-								<input
-									type="radio"
-									id="option3_drawer"
-									name="options-size"
-									value="16' 55&quot;"
-									onClick={handleClick}
-								/>
-								<label htmlFor="option3_drawer">16&apos; 55&quot;</label>
-							</div>
+							{sizeDataFetched.map((sizeData) => {
+								const { id, size } = sizeData;
+								return (
+									<div className="selection-btns_drawer" key={id}>
+										<input
+											type="radio"
+											id={id}
+											name="size"
+											value={size}
+											checked={selectedSize === size} // check if it's selected
+											onChange={handleClick} // use onChange instead of onClick
+										/>
+										<label htmlFor={id}>{size}</label>
+									</div>
+								);
+							})}
 						</div>
 
 						<div>
 							<h2 className="middle_heading">Surface Finish</h2>
-							<div className="selection-btns_drawer">
-								<input
-									type="radio"
-									id="option4_drawer"
-									name="options-finish"
-									value="Slate"
-									onClick={handleClick}
-								/>
-								<label htmlFor="option4_drawer">Slate</label>
-								<input
-									type="radio"
-									id="option5_drawer"
-									name="options-finish"
-									value="Granite"
-									onClick={handleClick}
-								/>
-								<label htmlFor="option5_drawer">Granite</label>
-								<input
-									type="radio"
-									id="option6_drawer"
-									name="options-finish"
-									value="Marble"
-									onClick={handleClick}
-								/>
-								<label htmlFor="option6_drawer">Marble</label>
-							</div>
+							{surfaceFinishDataFetched.map((surfaceData) => {
+								const { id, surface_finish } = surfaceData;
+								return (
+									<div className="selection-btns_drawer" key={id}>
+										<input
+											type="radio"
+											id={id}
+											name="surface"
+											value={surface_finish}
+											checked={selectedSurface === surface_finish} // check if it's selected
+											onChange={handleClick} // use onChange instead of onClick
+										/>
+										<label htmlFor={id}>{surface_finish}</label>
+									</div>
+								);
+							})}
 						</div>
 
 						<div>
 							<h2 className="right_heading">Colour</h2>
-							<div className="selection-btns_drawer">
-								<input
-									type="radio"
-									id="option7_drawer"
-									name="options-color"
-									value="Red"
-									onClick={handleClick}
-								/>
-								<label htmlFor="option7_drawer">Red</label>
-								<input
-									type="radio"
-									id="option8_drawer"
-									name="options-color"
-									value="Green"
-									onClick={handleClick}
-								/>
-								<label htmlFor="option8_drawer">Green</label>
-								<input
-									type="radio"
-									id="option9_drawer"
-									name="options-color"
-									value="Gray"
-									onClick={handleClick}
-								/>
-								<label htmlFor="option9_drawer">Gray</label>
-							</div>
+							{colorDataFetched.map((colorData) => {
+								const { id, color } = colorData;
+								return (
+									<div className="selection-btns_drawer" key={id}>
+										<input
+											type="radio"
+											id={id}
+											name="color"
+											value={color}
+											checked={selectedColor === color} // check if it's selected
+											onChange={handleClick} // use onChange instead of onClick
+										/>
+										<label htmlFor={id}>{color}</label>
+									</div>
+								);
+							})}
 						</div>
 					</div>
 				</Drawer.Body>

@@ -4,7 +4,8 @@ import { Modal, Button } from "rsuite";
 import Signal from "../assets/signal.png";
 import Rectangle from "../assets/Rectangle.png";
 import "./Cards.css";
-import CardCarousel from "./CardCarousel";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const Cards = () => {
 	const [showComponent, setShowComponent] = useState(false);
@@ -20,45 +21,6 @@ const Cards = () => {
 	const handleClose = () => setOpen(false);
 
 	const handleCLick = () => console.log("Button clicked");
-
-	const LiveImageModalComponent = () => {
-		return (
-			<>
-				<Modal size={size} open={open} onClose={handleClose}>
-					<Modal.Header closeButton={false}>
-						<Modal.Title style={HEADER_STYLES}>Live Image</Modal.Title>
-					</Modal.Header>
-					<Modal.Body>
-						<div className="gallery-container">
-							<CardCarousel />
-						</div>
-					</Modal.Body>
-				</Modal>
-			</>
-		);
-	};
-
-	const ApplicationModalComponent = () => {
-		return (
-			<>
-				<Modal size={size} open={open} onClose={handleClose}>
-					<Modal.Header closeButton={false}>
-						<Modal.Title style={HEADER_STYLES}>Application</Modal.Title>
-					</Modal.Header>
-					<Modal.Body>
-						<div className="gallery-container">
-							<CardCarousel />
-						</div>
-					</Modal.Body>
-				</Modal>
-			</>
-		);
-	};
-
-	const handleClickForComponent = (type) => {
-		setShowComponent(true);
-		setComponentType(type);
-	};
 
 	const [dataFetched, setDataFetched] = useState(false); // to control re-fetching of data
 
@@ -81,6 +43,83 @@ const Cards = () => {
 			setDataFetched(true);
 		}
 	}, [dataFetched]);
+
+	const LiveImageModalComponent = () => {
+		return (
+			<>
+				<Modal size={size} open={open} onClose={handleClose}>
+					<Modal.Header closeButton={false}>
+						<Modal.Title style={HEADER_STYLES}>Live Image</Modal.Title>
+					</Modal.Header>
+					<Modal.Body>
+						<div className="gallery-container">
+							<div className="carousel-wrapper">
+								<Carousel
+									swipeable
+									showStatus={false}
+									showIndicators={false}
+									dynamicHeight
+									showThumbs={false}
+								>
+									{tileDataFetched.map((tileData) => {
+										return (
+											<div key={tileData.live_images.id}>
+												<img
+													src={tileData.live_images.images}
+													style={{ width: "100%" }}
+												/>
+											</div>
+										);
+									})}
+								</Carousel>
+							</div>
+						</div>
+					</Modal.Body>
+				</Modal>
+			</>
+		);
+	};
+
+	const ApplicationModalComponent = () => {
+		return (
+			<>
+				<Modal size={size} open={open} onClose={handleClose}>
+					<Modal.Header closeButton={false}>
+						<Modal.Title style={HEADER_STYLES}>Application</Modal.Title>
+					</Modal.Header>
+					<Modal.Body>
+						<div className="gallery-container">
+							<div className="carousel-wrapper">
+								<Carousel
+									swipeable
+									showStatus={false}
+									showIndicators={false}
+									dynamicHeight
+									showThumbs={false}
+								>
+									{tileDataFetched.map((tileData) => {
+										return (
+											<div key={tileData.app_images.id}>
+												<img
+													src={tileData.app_images.images}
+													style={{ width: "100%" }}
+												/>
+											</div>
+										);
+									})}
+								</Carousel>
+							</div>
+						</div>
+					</Modal.Body>
+				</Modal>
+			</>
+		);
+	};
+
+	const handleClickForComponent = (type) => {
+		setShowComponent(true);
+		setComponentType(type);
+	};
 
 	const HEADER_STYLES = {
 		fontFamily: '"Quicksand"',
