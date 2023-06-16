@@ -1,8 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import { Modal, Button } from "rsuite";
-import Tile1 from "../assets/tile img 1.png";
-import Tile2 from "../assets/tile img 2.png";
-import Tile3 from "../assets/tile img 3.png";
 import Signal from "../assets/signal.png";
 import Rectangle from "../assets/Rectangle.png";
 import "./Cards.css";
@@ -62,6 +60,28 @@ const Cards = () => {
 		setComponentType(type);
 	};
 
+	const [dataFetched, setDataFetched] = useState(false); // to control re-fetching of data
+
+	const [tileDataFetched, setTileDataFetched] = useState([]);
+
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const tileResponse = await axios.get(
+					"http://versatileslab.com/apis/admin_api/get_tiles.php",
+				);
+				setTileDataFetched(tileResponse.data.data);
+			} catch (error) {
+				console.log(error.response.data);
+			}
+		};
+
+		if (!dataFetched) {
+			fetchData();
+			setDataFetched(true);
+		}
+	}, [dataFetched]);
+
 	const HEADER_STYLES = {
 		fontFamily: '"Quicksand"',
 		fontStyle: "normal",
@@ -87,53 +107,20 @@ const Cards = () => {
 		color: "#fff",
 	};
 
-	const Data = [
-		{
-			id: 0,
-			heading: "Tiles Title",
-			paragraph:
-				"Lorem ipsum dolor sit amet consectetur. Nunc id nunc lacinia \n sed ut sed laoreet. Tempor netus vel cras dolor sit tellus.\n",
-			size: `16' 55"`,
-			type: "Marble",
-			color: "Red",
-			image: Tile1,
-		},
-		{
-			id: 1,
-			heading: "Tiles Title",
-			paragraph:
-				"Lorem ipsum dolor sit amet consectetur. Nunc id nunc lacinia \n sed ut sed laoreet. Tempor netus vel cras dolor sit tellus.\n",
-			size: `16' 55"`,
-			type: "Marble",
-			color: "Red",
-			image: Tile2,
-		},
-		{
-			id: 2,
-			heading: "Tiles Title",
-			paragraph:
-				"Lorem ipsum dolor sit amet consectetur. Nunc id nunc lacinia \n sed ut sed laoreet. Tempor netus vel cras dolor sit tellus.\n",
-			size: `16' 55"`,
-			type: "Marble",
-			color: "Red",
-			image: Tile3,
-		},
-	];
-
 	return (
 		<>
-			{Data.map(({ id, heading, paragraph, size, type, color, image }) => {
+			{tileDataFetched.map((tileData) => {
 				return (
-					<div key={id} className="polaroid">
+					<div key={tileData.id} className="polaroid">
 						<img
-							src={image}
+							src={tileData.thumbnail_image}
 							alt="Tile Image"
 							style={{ width: "100%" }}
 							className="item-image"
 						/>
 						<div className="text-container">
 							<div className="heading-btn__container">
-								<h3>{heading}</h3>
+								<h3>{tileData.tile_title}</h3>
 								<Button
 									style={specialBtn}
 									onClick={() => {
@@ -150,7 +137,7 @@ const Cards = () => {
 								{"  "}
 							</div>
 							<div className="paragraph-btn__container">
-								<p>{paragraph}</p>
+								<p>{tileData.tile_desc}</p>
 								<Button
 									style={specialBtn}
 									onClick={() => {
@@ -170,14 +157,16 @@ const Cards = () => {
 								)}
 							</div>
 							<div className="btn-container">
+								{tileData.tile_size.map((size) => (
+									<Button key={size.id} style={btnStyle} onClick={handleCLick}>
+										{size.size}
+									</Button>
+								))}
 								<Button style={btnStyle} onClick={handleCLick}>
-									{size}
+									{tileData.surface_finish}
 								</Button>
 								<Button style={btnStyle} onClick={handleCLick}>
-									{type}
-								</Button>
-								<Button style={btnStyle} onClick={handleCLick}>
-									{color}
+									{tileData.color}
 								</Button>
 							</div>
 						</div>

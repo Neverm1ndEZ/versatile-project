@@ -13,11 +13,10 @@ const Catalogue = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				await axios
-					.get("http://versatileslab.com/apis/admin_api/get_catalogues.php")
-					.then((catalogueResponse) =>
-						setCatalogueDataFetched(catalogueResponse.data.data),
-					);
+				const catalogueResponse = await axios.get(
+					"http://versatileslab.com/apis/admin_api/get_catalogues.php",
+				);
+				setCatalogueDataFetched(catalogueResponse.data.data);
 			} catch (error) {
 				console.log(error.response.data);
 			}
@@ -33,19 +32,26 @@ const Catalogue = () => {
 		<>
 			<div className="card__container" onClick={handleClickCards}>
 				{catalogueDataFetched.map((catalogueData) => {
-					const { id, pdf_url, pdf_title, pdf_desc } = catalogueData; //TODO: add pdf_url in an onClick fucntion to download the pdfs
+					const { id, pdf_url, pdf_title, pdf_desc } = catalogueData;
 					return (
-						<div key={id} className="item">
-							<div className="hero_item-image">
-								<img
-									src={CardImage}
-									alt="File Image"
-									style={{ overflow: "hidden" }}
-								/>
+						<a
+							href={pdf_url}
+							key={id}
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							<div className="item">
+								<div className="hero_item-image">
+									<img
+										src={CardImage}
+										alt="File Image"
+										style={{ overflow: "hidden" }}
+									/>
+								</div>
+								<h3>{pdf_title}</h3>
+								<p>{pdf_desc}</p>
 							</div>
-							<h3>{pdf_title}</h3>
-							<p>{pdf_desc}</p>
-						</div>
+						</a>
 					);
 				})}
 			</div>

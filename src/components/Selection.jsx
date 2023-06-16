@@ -3,14 +3,32 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 const Selection = () => {
+	const [selectedSize, setSelectedSize] = useState(""); // state for selected size
+	const [selectedSurface, setSelectedSurface] = useState(""); // state for selected surface finish
+	const [selectedColor, setSelectedColor] = useState(""); // state for selected color
+
 	const handleClick = (event) => {
-		console.log("The button has been clicked " + event.target.value);
+		const { name, value } = event.target;
+
+		// Update the selected state based on the group of buttons clicked
+		switch (name) {
+			case "size":
+				setSelectedSize(value);
+				break;
+			case "surface":
+				setSelectedSurface(value);
+				break;
+			case "color":
+				setSelectedColor(value);
+				break;
+			default:
+				break;
+		}
 	};
 
 	const [dataFetched, setDataFetched] = useState(false); // to control re-fetching of data
-
 	const [colorDataFetched, setColorDataFetched] = useState([]);
-	const [sizeDataFetched, seSizeDataFetched] = useState([]);
+	const [sizeDataFetched, setSizeDataFetched] = useState([]);
 	const [surfaceFinishDataFetched, setSurfaceFinishDataFetched] = useState([]);
 
 	useEffect(() => {
@@ -24,7 +42,7 @@ const Selection = () => {
 
 				axios
 					.get("http://versatileslab.com/apis/admin_api/get_size.php")
-					.then((sizeResponse) => seSizeDataFetched(sizeResponse.data.data));
+					.then((sizeResponse) => setSizeDataFetched(sizeResponse.data.data));
 
 				axios
 					.get(
@@ -56,9 +74,10 @@ const Selection = () => {
 								<input
 									type="radio"
 									id={id}
-									name={size}
+									name="size"
 									value={size}
-									onClick={handleClick}
+									checked={selectedSize === size} // check if it's selected
+									onChange={handleClick} // use onChange instead of onClick
 								/>
 								<label htmlFor={id}>{size}</label>
 							</div>
@@ -77,9 +96,10 @@ const Selection = () => {
 								<input
 									type="radio"
 									id={id}
-									name={surface_finish}
+									name="surface"
 									value={surface_finish}
-									onClick={handleClick}
+									checked={selectedSurface === surface_finish} // check if it's selected
+									onChange={handleClick} // use onChange instead of onClick
 								/>
 								<label htmlFor={id}>{surface_finish}</label>
 							</div>
@@ -98,9 +118,10 @@ const Selection = () => {
 								<input
 									type="radio"
 									id={id}
-									name={color}
+									name="color"
 									value={color}
-									onClick={handleClick}
+									checked={selectedColor === color} // check if it's selected
+									onChange={handleClick} // use onChange instead of onClick
 								/>
 								<label htmlFor={id}>{color}</label>
 							</div>
