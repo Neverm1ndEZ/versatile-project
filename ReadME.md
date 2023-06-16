@@ -1,11 +1,11 @@
-# How to configure the project to run on local machine?
+# How to configure the project to run on the local machine?
 
-1. Clone this project specific to the branch
+1. Clone this project specific to the branch by running `git clone https://github.com/Localville/versatile-web.git --branch mihir-versatile-project`
 
-2. Open the project in code editor of your choice. In the terminal, run
-   `npm install`, it should create node_modules
+2. Open the project in the code editor of your choice. In the terminal, run
+   `npm install`, should create node_modules
 
-3. After the node_modules are installed, run `npm run dev` to run the project
+3. After the node_modules are installed, run `npm run dev -- --port 3000` to run the project
 
 ## The project is configured in Vite - React + JavaScript
 
