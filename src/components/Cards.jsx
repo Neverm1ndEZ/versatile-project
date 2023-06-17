@@ -154,7 +154,7 @@ const Cards = () => {
 						<img
 							src={tileData.thumbnail_image}
 							alt="Tile Image"
-							style={{ width: "100%" }}
+							style={{ width: "50%", height: "50%" }}
 							className="item-image"
 						/>
 						<div className="text-container">

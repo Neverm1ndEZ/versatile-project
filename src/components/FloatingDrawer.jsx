@@ -13,14 +13,13 @@ const FloatingDrawer = () => {
 		setPlacement(key);
 	};
 
-	const [selectedSize, setSelectedSize] = useState(""); // state for selected size
-	const [selectedSurface, setSelectedSurface] = useState(""); // state for selected surface finish
-	const [selectedColor, setSelectedColor] = useState(""); // state for selected color
+	const [selectedSize, setSelectedSize] = useState("");
+	const [selectedSurface, setSelectedSurface] = useState("");
+	const [selectedColor, setSelectedColor] = useState("");
 
 	const handleClick = (event) => {
 		const { name, value } = event.target;
 
-		// Update the selected state based on the group of buttons clicked
 		switch (name) {
 			case "size":
 				setSelectedSize(value);
@@ -36,31 +35,30 @@ const FloatingDrawer = () => {
 		}
 	};
 
-	const [dataFetched, setDataFetched] = useState(false); // to control re-fetching of data
+	const [dataFetched, setDataFetched] = useState(false);
 	const [colorDataFetched, setColorDataFetched] = useState([]);
 	const [sizeDataFetched, setSizeDataFetched] = useState([]);
 	const [surfaceFinishDataFetched, setSurfaceFinishDataFetched] = useState([]);
 
 	useEffect(() => {
-		const fetchData = () => {
+		const fetchData = async () => {
 			try {
-				axios
-					.get("https://versatileslab.com/apis/admin_api/get_color.php")
-					.then((colorResponse) =>
-						setColorDataFetched(colorResponse.data.data),
-					);
+				const colorResponse = await axios.get(
+					"https://versatileslab.com/apis/admin_api/get_color.php",
+				);
+				setColorDataFetched(colorResponse.data.data);
 
-				axios
-					.get("http://versatileslab.com/apis/admin_api/get_size.php")
-					.then((sizeResponse) => setSizeDataFetched(sizeResponse.data.data));
+				const sizeResponse = await axios.get(
+					"http://versatileslab.com/apis/admin_api/get_size.php",
+				);
+				setSizeDataFetched(sizeResponse.data.data);
 
-				axios
-					.get(
-						"http://versatileslab.com/apis/admin_api/get_surface_finishes.php",
-					)
-					.then((surfaceFinishResponse) =>
-						setSurfaceFinishDataFetched(surfaceFinishResponse.data.data),
-					);
+				const surfaceFinishResponse = await axios.get(
+					"http://versatileslab.com/apis/admin_api/get_surface_finishes.php",
+				);
+				setSurfaceFinishDataFetched(surfaceFinishResponse.data.data);
+
+				setDataFetched(true);
 			} catch (error) {
 				console.log(error.response.data);
 			}
@@ -68,7 +66,6 @@ const FloatingDrawer = () => {
 
 		if (!dataFetched) {
 			fetchData();
-			setDataFetched(true);
 		}
 	}, [dataFetched]);
 
@@ -94,18 +91,18 @@ const FloatingDrawer = () => {
 						<div>
 							<h2 className="left_heading">Size</h2>
 							{sizeDataFetched.map((sizeData) => {
-								const { id, size } = sizeData;
+								const sizeInputId = `size-${sizeData.id}`;
 								return (
-									<div className="selection-btns_drawer" key={id}>
+									<div className="selection-btns" key={sizeData.id}>
 										<input
 											type="radio"
-											id={id}
+											id={sizeInputId}
 											name="size"
-											value={size}
-											checked={selectedSize === size} // check if it's selected
+											value={sizeData.size}
+											checked={selectedSize === sizeData.size} // check if it's selected
 											onChange={handleClick} // use onChange instead of onClick
 										/>
-										<label htmlFor={id}>{size}</label>
+										<label htmlFor={sizeData.id}>{sizeData.size}</label>
 									</div>
 								);
 							})}
@@ -114,18 +111,20 @@ const FloatingDrawer = () => {
 						<div>
 							<h2 className="middle_heading">Surface Finish</h2>
 							{surfaceFinishDataFetched.map((surfaceData) => {
-								const { id, surface_finish } = surfaceData;
+								const surfaceFinishInputId = `surface-${surfaceData.id}`;
 								return (
-									<div className="selection-btns_drawer" key={id}>
+									<div className="selection-btns" key={surfaceData.id}>
 										<input
 											type="radio"
-											id={id}
+											id={surfaceFinishInputId}
 											name="surface"
-											value={surface_finish}
-											checked={selectedSurface === surface_finish} // check if it's selected
+											value={surfaceData.surface_finish}
+											checked={selectedSurface === surfaceData.surface_finish} // check if it's selected
 											onChange={handleClick} // use onChange instead of onClick
 										/>
-										<label htmlFor={id}>{surface_finish}</label>
+										<label htmlFor={surfaceData.id}>
+											{surfaceData.surface_finish}
+										</label>
 									</div>
 								);
 							})}
@@ -134,18 +133,18 @@ const FloatingDrawer = () => {
 						<div>
 							<h2 className="right_heading">Colour</h2>
 							{colorDataFetched.map((colorData) => {
-								const { id, color } = colorData;
+								const colorInputId = `color-${colorData.id}`;
 								return (
-									<div className="selection-btns_drawer" key={id}>
+									<div className="selection-btns" key={colorData.id}>
 										<input
 											type="radio"
-											id={id}
+											id={colorInputId}
 											name="color"
-											value={color}
-											checked={selectedColor === color} // check if it's selected
+											value={colorData.color}
+											checked={selectedColor === colorData.color} // check if it's selected
 											onChange={handleClick} // use onChange instead of onClick
 										/>
-										<label htmlFor={id}>{color}</label>
+										<label htmlFor={colorData.id}>{colorData.color}</label>
 									</div>
 								);
 							})}

@@ -1,8 +1,8 @@
 import "./Selection.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, forwardRef } from "react";
 import axios from "axios";
 
-const Selection = () => {
+const Selection = forwardRef((props, ref) => {
 	const [selectedSize, setSelectedSize] = useState(""); // state for selected size
 	const [selectedSurface, setSelectedSurface] = useState(""); // state for selected surface finish
 	const [selectedColor, setSelectedColor] = useState(""); // state for selected color
@@ -68,18 +68,18 @@ const Selection = () => {
 				<div>
 					<h2 className="left">Size</h2>
 					{sizeDataFetched.map((sizeData) => {
-						const { id, size } = sizeData;
+						const sizeInputId = `size-${sizeData.id}`;
 						return (
-							<div className="selection-btns" key={id}>
+							<div className="selection-btns" key={sizeData.id}>
 								<input
 									type="radio"
-									id={id}
+									id={sizeInputId}
 									name="size"
-									value={size}
-									checked={selectedSize === size} // check if it's selected
+									value={sizeData.size}
+									checked={selectedSize === sizeData.size} // check if it's selected
 									onChange={handleClick} // use onChange instead of onClick
 								/>
-								<label htmlFor={id}>{size}</label>
+								<label htmlFor={sizeData.id}>{sizeData.size}</label>
 							</div>
 						);
 					})}
@@ -90,18 +90,20 @@ const Selection = () => {
 				<div>
 					<h2 className="middle">Surface Finish</h2>
 					{surfaceFinishDataFetched.map((surfaceData) => {
-						const { id, surface_finish } = surfaceData;
+						const surfaceFinishInputId = `surface-${surfaceData.id}`;
 						return (
-							<div className="selection-btns" key={id}>
+							<div className="selection-btns" key={surfaceData.id}>
 								<input
 									type="radio"
-									id={id}
+									id={surfaceFinishInputId}
 									name="surface"
-									value={surface_finish}
-									checked={selectedSurface === surface_finish} // check if it's selected
+									value={surfaceData.surface_finish}
+									checked={selectedSurface === surfaceData.surface_finish} // check if it's selected
 									onChange={handleClick} // use onChange instead of onClick
 								/>
-								<label htmlFor={id}>{surface_finish}</label>
+								<label htmlFor={surfaceData.id}>
+									{surfaceData.surface_finish}
+								</label>
 							</div>
 						);
 					})}
@@ -112,18 +114,18 @@ const Selection = () => {
 				<div>
 					<h2 className="right">Colour</h2>
 					{colorDataFetched.map((colorData) => {
-						const { id, color } = colorData;
+						const colorInputId = `color-${colorData.id}`;
 						return (
-							<div className="selection-btns" key={id}>
+							<div className="selection-btns" key={colorData.id}>
 								<input
 									type="radio"
-									id={id}
+									id={colorInputId}
 									name="color"
-									value={color}
-									checked={selectedColor === color} // check if it's selected
+									value={colorData.color}
+									checked={selectedColor === colorData.color} // check if it's selected
 									onChange={handleClick} // use onChange instead of onClick
 								/>
-								<label htmlFor={id}>{color}</label>
+								<label htmlFor={colorData.id}>{colorData.color}</label>
 							</div>
 						);
 					})}
@@ -131,5 +133,8 @@ const Selection = () => {
 			</div>
 		</>
 	);
-};
+});
+
+Selection.displayName = "Selection";
+
 export default Selection;

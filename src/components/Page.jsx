@@ -85,18 +85,18 @@ const Page = () => {
 					<div>
 						<h2>Size</h2>
 						{sizeDataFetched.map((sizeData) => {
-							const { id, size } = sizeData;
+							const sizeInputId = `size-${sizeData.id}`;
 							return (
-								<div className="btns-container" key={id}>
+								<div className="btns-container" key={sizeData.id}>
 									<input
 										type="radio"
-										id={id}
+										id={sizeInputId}
 										name="size"
-										value={size}
-										checked={selectedSize === size} // check if it's selected
+										value={sizeData.size}
+										checked={selectedSize === sizeData.size} // check if it's selected
 										onChange={handleClick} // use onChange instead of onClick
 									/>
-									<label htmlFor={id}>{size}</label>
+									<label htmlFor={sizeData.id}>{sizeData.size}</label>
 								</div>
 							);
 						})}
@@ -105,18 +105,20 @@ const Page = () => {
 					<div>
 						<h2>Surface Finish</h2>
 						{surfaceFinishDataFetched.map((surfaceData) => {
-							const { id, surface_finish } = surfaceData;
+							const surfaceFinishInputId = `surface-${surfaceData.id}`;
 							return (
-								<div className="btns-container" key={id}>
+								<div className="btns-container" key={surfaceData.id}>
 									<input
 										type="radio"
-										id={id}
+										id={surfaceFinishInputId}
 										name="surface"
-										value={surface_finish}
-										checked={selectedSurface === surface_finish} // check if it's selected
+										value={surfaceData.surface_finish}
+										checked={selectedSurface === surfaceData.surface_finish} // check if it's selected
 										onChange={handleClick} // use onChange instead of onClick
 									/>
-									<label htmlFor={id}>{surface_finish}</label>
+									<label htmlFor={surfaceData.id}>
+										{surfaceData.surface_finish}
+									</label>
 								</div>
 							);
 						})}
@@ -125,18 +127,18 @@ const Page = () => {
 					<div>
 						<h2>Colour</h2>
 						{colorDataFetched.map((colorData) => {
-							const { id, color } = colorData;
+							const colorInputId = `color-${colorData.id}`;
 							return (
-								<div className="btns-container" key={id}>
+								<div className="btns-container" key={colorData.id}>
 									<input
 										type="radio"
-										id={id}
+										id={colorInputId}
 										name="color"
-										value={color}
-										checked={selectedColor === color} // check if it's selected
+										value={colorData.color}
+										checked={selectedColor === colorData.color} // check if it's selected
 										onChange={handleClick} // use onChange instead of onClick
 									/>
-									<label htmlFor={id}>{color}</label>
+									<label htmlFor={colorData.id}>{colorData.color}</label>
 								</div>
 							);
 						})}
